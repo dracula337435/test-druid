@@ -6,7 +6,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
-    password: 1234
+    password: "0123"
     druid:
       max-active: 100
       initial-size: 1
@@ -24,6 +24,7 @@ spring:
       filter:
         stat:
           enabled: true
+      filters: my # 自定义的filter
       # WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter
       web-stat-filter:
         enabled: true #是否启用StatFilter默认值false

@@ -58,3 +58,5 @@ The database returned no natively generated identity value;
 ```
 INFO 4875 --- [           main] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: （略）
 ```
+
+1. 碰到```Public Key Retrieval is not allowed```在url后加上```allowPublicKeyRetrieval=true```
