@@ -39,7 +39,7 @@ useSSL=false
 
 1. 报错
 ```
-Table '***.hibernate_sequence' doesn't exist
+Table '（数据库名）.hibernate_sequence' doesn't exist
 ```
 给实体的id字段加注解
 ```
@@ -52,4 +52,9 @@ AUTO_INCREMENT PRIMARY KEY
 如果没在数据库上没有主键和自增，则会报错
 ```
 The database returned no natively generated identity value;
+```
+
+1. 测试方法上可用```javax```的```@Transactional```，也可用```spring```的，方法执行后自动回滚
+```
+INFO 4875 --- [           main] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: （略）
 ```
