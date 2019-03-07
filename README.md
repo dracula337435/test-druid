@@ -60,3 +60,8 @@ INFO 4875 --- [           main] o.s.t.c.transaction.TransactionContext   : Rolle
 ```
 
 1. 碰到```Public Key Retrieval is not allowed```在url后加上```allowPublicKeyRetrieval=true```
+
+1. ```DruidDataSourceWrapper```用```@Autowired```的方式加载了各```Filter```  
+各```Filter```在```DruidFilterConfiguration```中配置。  
+利用这两点，```MyFilter extends ConfigFilter```且不实例化```ConfigFilter```，在其中换自己的逻辑。  
+这样一来，```MyFilter```可使用```spring```基础设施

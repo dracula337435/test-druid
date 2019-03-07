@@ -24,7 +24,6 @@ spring:
       filter:
         stat:
           enabled: true
-      filters: my # 自定义的filter
       # WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter
       web-stat-filter:
         enabled: true #是否启用StatFilter默认值false
