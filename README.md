@@ -65,3 +65,5 @@ INFO 4875 --- [           main] o.s.t.c.transaction.TransactionContext   : Rolle
 各```Filter```在```DruidFilterConfiguration```中配置。  
 利用这两点，```MyFilter extends ConfigFilter```且不实例化```ConfigFilter```，在其中换自己的逻辑。  
 这样一来，```MyFilter```可使用```spring```基础设施
+
+1. 换用```h2```后，默认的```url```为```jdbc:h2:mem:druidDataSource```
