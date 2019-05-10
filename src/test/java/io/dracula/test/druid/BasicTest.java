@@ -2,6 +2,7 @@ package io.dracula.test.druid;
 
 import io.dracula.test.druid.entity.User;
 import io.dracula.test.druid.repository.UserRepository;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.test.context.transaction.AfterTransaction;
 import org.springframework.test.context.transaction.BeforeTransaction;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * @author dk
@@ -26,9 +28,13 @@ public class BasicTest {
     @Autowired
     private UserRepository userRepository;
 
+    private int numberOfUsersBeforeTest = 0;
+
     @BeforeTransaction
     public void beforeTransaction(){
-        logger.info(userRepository.findAll().toString());
+        logger.info("开始事务前");
+        numberOfUsersBeforeTest = getAndPrintAllUsers();
+        logger.info("user数="+numberOfUsersBeforeTest);
     }
 
     @Transactional
@@ -37,12 +43,29 @@ public class BasicTest {
         User usr = new User();
         usr.setName("gxk");
         userRepository.save(usr);
-        logger.info(userRepository.findAll().toString());
+        int numInTransaction = getAndPrintAllUsers();
+        logger.info("事务内，增加一个user后，user数="+numInTransaction);
+        logger.info("此时，期望user数比事务前的多1，即"+(numberOfUsersBeforeTest+1));
+        Assert.assertEquals(numberOfUsersBeforeTest+1, numInTransaction);
     }
 
     @AfterTransaction
     public void afterTransaction(){
-        logger.info(userRepository.findAll().toString());
+        logger.info("事务结束后");
+        int numAfterTransaction = getAndPrintAllUsers();
+        logger.info("user数="+numAfterTransaction);
+        logger.info("此时，期望user数和事务前一样，即"+numberOfUsersBeforeTest);
+        Assert.assertEquals(numberOfUsersBeforeTest, numAfterTransaction);
+    }
+
+    /**
+     *
+     * @return
+     */
+    private int getAndPrintAllUsers(){
+        List<User> allUsers = userRepository.findAll();
+        logger.info(allUsers.toString());
+        return allUsers.size();
     }
 
 }
