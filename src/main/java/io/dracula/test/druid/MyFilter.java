@@ -24,6 +24,7 @@ public class MyFilter extends ConfigFilter {
     @Override
     public void init(DataSourceProxy dataSourceProxy) {
         DruidDataSource dataSource = (DruidDataSource) dataSourceProxy;
+        logger.info("url为"+dataSource.getUrl());
         Properties connectionProperties = dataSource.getConnectProperties();
         logger.info(connectionProperties.toString());
         String encryptedPassword = dataSource.getPassword();
